@@ -2,7 +2,18 @@ import cv2
 from tensorflow.keras.models import Model, load_model
 import numpy as np
 from flask import Flask, render_template, request
-import imageio
+import pyrebase
+
+
+config = {
+  'apiKey': "AIzaSyCvQScWOdmOAh7sjh-fbOtfRPs-wmOF640",
+  'authDomain': "xraydiagnos.firebaseapp.com",
+  'projectId': "xraydiagnos",
+  'storageBucket': "xraydiagnos.appspot.com",
+  'messagingSenderId': "371080730510",
+  'appId': "1:371080730510:web:a8c2e0587e3a4f3a2ef6df",
+    'databaseURL': "https://xraydiagnos.firebaseapp.com"
+}
 
 image_size = 299
 batch_size = 32
@@ -25,8 +36,9 @@ def convertImage(imgData1):
 
 @app.route('/predict/', methods=['POST'])
 def predict():
+    fioData = request.form['fio']
     imgData = request.files['img']
-    imgData.save('rrr.png')
+    imgData.save(f'{fioData}.png')
 
     try:
         convertImage(imgData)
@@ -37,7 +49,7 @@ def predict():
     labels = {0: 'COVID19', 1: 'NORMAL', 2: 'PNEUMONIA', 3: 'TURBERCULOSIS'}
 
     img_width, img_height = 224, 224
-    image = cv2.imread('rrr.png')
+    image = cv2.imread(f'{fioData}.png')
     image = cv2.resize(image, (img_width, img_height))
     image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
     image = image[np.newaxis, ...]
@@ -48,6 +60,15 @@ def predict():
 
     prediction = np.argmax(prediction)
     output = labels[prediction]
+#------------------------------------------------------------------------
+    firebase = pyrebase.initialize_app(config)
+    storage = firebase.storage()
+
+#дать на выпуск fioata, а загружать rrr
+    path_local = f"{fioData}.png"
+
+    storage.child(path_local).put(path_local)
+# ------------------------------------------------------------------------
     return str(output)
 
 if __name__ == "__main__":
