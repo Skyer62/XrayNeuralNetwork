@@ -3,15 +3,16 @@ from tensorflow.keras.models import Model, load_model
 import numpy as np
 from flask import Flask, render_template, request
 import pyrebase
-
+from transliterate import translit, get_available_language_codes
+from datetime import datetime
 
 config = {
-  'apiKey': "AIzaSyCvQScWOdmOAh7sjh-fbOtfRPs-wmOF640",
-  'authDomain': "xraydiagnos.firebaseapp.com",
-  'projectId': "xraydiagnos",
-  'storageBucket': "xraydiagnos.appspot.com",
-  'messagingSenderId': "371080730510",
-  'appId': "1:371080730510:web:a8c2e0587e3a4f3a2ef6df",
+    'apiKey': "AIzaSyCvQScWOdmOAh7sjh-fbOtfRPs-wmOF640",
+    'authDomain': "xraydiagnos.firebaseapp.com",
+    'projectId': "xraydiagnos",
+    'storageBucket': "xraydiagnos.appspot.com",
+    'messagingSenderId': "371080730510",
+    'appId': "1:371080730510:web:a8c2e0587e3a4f3a2ef6df",
     'databaseURL': "https://xraydiagnos.firebaseapp.com"
 }
 
@@ -37,8 +38,11 @@ def convertImage(imgData1):
 @app.route('/predict/', methods=['POST'])
 def predict():
     fioData = request.form['fio']
+    fioData.replace(" ", "")
+    fioData = translit(fioData, language_code='ru', reversed=True)
+
     imgData = request.files['img']
-    imgData.save(f'{fioData}.png')
+    imgData.save('rrr.png')
 
     try:
         convertImage(imgData)
@@ -46,10 +50,10 @@ def predict():
         f = request.files['img']
         f.save('image.png')
 
-    labels = {0: 'COVID19', 1: 'NORMAL', 2: 'PNEUMONIA', 3: 'TURBERCULOSIS'}
+    labels = {0: 'COVID-19', 1: 'Нормальные', 2: 'Пневмония', 3: 'Туберкулёз'}
 
     img_width, img_height = 224, 224
-    image = cv2.imread(f'{fioData}.png')
+    image = cv2.imread(f'rrr.png')
     image = cv2.resize(image, (img_width, img_height))
     image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
     image = image[np.newaxis, ...]
@@ -64,10 +68,10 @@ def predict():
     firebase = pyrebase.initialize_app(config)
     storage = firebase.storage()
 
-#дать на выпуск fioata, а загружать rrr
-    path_local = f"{fioData}.png"
+    path_local = "rrr.png"
+    path_load = f"images/{fioData + datetime.now().strftime('%Y-%m-%d %H:%M:%S')}.png"
 
-    storage.child(path_local).put(path_local)
+    storage.child(path_load).put(path_local)
 # ------------------------------------------------------------------------
     return str(output)
 
