@@ -1,21 +1,72 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-100">
 <head>
-<title>MNIST CNN</title>
+<title>XrayDiagnosist</title>
     <link rel="icon" href="data:;base64,=">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </head>
-    <body class="bg-light">
-        <h1 class="text-center p-5">Сайт по определению патологий лёгких</h1>
+    <body class="d-flex flex-column h-5 text-center text-white bg-dark">
 
+        <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+            <header class="mb-auto">
+                <div>
+                    <h3 class="float-md-start mb-0">Xray Diagnosist</h3>
+                    <nav class="nav nav-masthead justify-content-center float-md-end">
+
+                    </nav>
+                </div>
+            </header>
+        </div>
+
+        <div class="breakpoints">
+        <div class="position-relative overflow-hidden p-3 m-md-3 text-center">
+            <div class="col-12 col-sm-12 col-md-10 col-lg-8 col-xl-5 gy-3 mx-auto">
+                <h1 class="display-4 fw-normal">Xray Diagnosist</h1>
+                <p class="lead col-12 p-lg-5">Данный сайт был разработан студентами Петровского колледжа в целях исследования патологий легких с помощью нейронной сети. 
+                    На данном сайте вы можете протестировать как приложенные фотографии так и свои, чтобы проверить работу нейронной сети. 
+                    Точность ответа составляет - <strong>94.7%</strong></p>
+            </div>
+        </div>
+        </div>
+    
+
+        <div class="row bg-light my-3 p-5 text-black">
+            <div class="position-relative overflow-hidden p-3 m-md-3 text-center">
+            <div class="col-12 col-sm-12 col-md-10 col-lg-8 col-xl-5 gy-3 mx-auto">
+                <h2 class="display-4 fw-normal">Изображения для загрузки</h2>
+                <p class="lead col-12 p-lg-5">
+                    Если у вас нет подходящих изображений, но опробовать нейронную сеть в деле очень хочется - скачивайте эти файлы, загружайте и смотрите результат!
+                </p>
+            </div>
+                
+            </div>
+            
+            <div class="col-md-4 col-sm-12 col-xs-12 my-col text-center p-0">
+                <img class="rounded-circle" src="{{ url_for('static',filename='images/person14_virus_44.png') }}" height="140" width="140">
+                <h2>Пневмония</h2>
+                <p>Пневмония может быть самостоятельным заболеванием или вторичным осложнением многих инфекционных и неинфекционных процессов.</p>
+            </div>
+            <div class="col-md-4 col-sm-12 col-xs-12 my-col text-center p-0">
+                <img class="rounded-circle" src="{{ url_for('static',filename='images/COVID19(460).png') }}" height="140" width="140">
+                <h2>Covid-19</h2>
+                <p>Означает «болезнь, вызываемая коронавирусом», а цифра 19 в названии указывает на год появления вируса.</p>
+            </div>
+            <div class="col-md-4 col-sm-12 col-xs-12 my-col text-center p-0">
+                <img class="rounded-circle" src="{{ url_for('static',filename='images/Tuberculosis-662.png') }}" height="140" width="140">
+                <h2>Туберкулез</h2>
+                <p>Широко распространённое в мире инфекционное заболевание человека и животных, вызываемое различными видами микобактерий из группы Mycobacterium tuberculosis.</p>
+            </div>
+        </div>
+
+        </div>
         <div class="container">
             <div class="form-signin">
                 <div class="py-5">
                     <form class="needs-validation" novalidate>
                         <div class=" container-fluid  col-md-6">
-                            <label for="validationCustom03" class="form-label">Введите Ваше ФИО:</label>
+                            <label for="validationCustom03" class="form-label py-3">Введите Ваше ФИО:</label>
                             <input type="text" name="fio" class="form-control" id="validationCustom03" required>
                             <div class="invalid-feedback">
                                 Не введено ФИО
@@ -23,18 +74,43 @@
                         </div>
 
                         <div class="col-md-6 py-3 mb-3 justify-content-center  container-fluid">
-                             <label for="validationCustom03" class="form-label">Выберите фотографию:</label>
+                             <label for="validationCustom03" class="form-label py-3">Выберите фотографию:</label>
                             <input type="file" name="img" accept="image/png" class="form-control" aria-label="file example" required>
                             <div class="invalid-feedback">Файл не выбран</div>
                         </div>
 
                         <div class="container-fluid  col-md-1">
-                            <button class="btn btn-primary btn-lg" type="submit">Отправить</button>
+                            <button class="btn btn-light btn-lg" type="submit">Отправить</button>
                         </div>
                     </form>
                 </div>
             </div>
-            <h3 class="text-center">Результат: <span id="result"></span></h3>
+            <h3 class="text-center py-5">Результат: <span id="result"></span></h3>
+        </div>
+
+        <div class="footer mt-auto py-2 bg-light text-black">
+            <section class="d-flex justify-content-center border-bottom">
+              <section class="">
+                <div class="container text-center text-md-start mt-5">
+                  <div class="row mt-3">
+                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                      <h6 class="text-uppercase fw-bold mb-4">
+                        <i class="fas fa-gem me-3"></i>Mini coop project
+                      </h6>
+                      <p>
+                        Данный проект создан двумя замечательными ребятами в целях закрыть предмет в колледже. Всем здоровья!
+                      </p>
+                    </div>
+
+                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                      <h6 class="text-uppercase fw-bold mb-4">Контакты</h6>
+                      <p><i class="fas fa-home me-3"></i>Санкт-Петербург, г.Колпино и г.Красное село</p>
+                      <p><i class="fas fa-phone me-3"></i> Tg: vichkakichka</p>
+                      <p><i class="fas fa-print me-3"></i> Tg: Dan4eJl </p>
+                    </div>
+                  </div>
+                </div>
+              </section>
         </div>
 
         <script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
