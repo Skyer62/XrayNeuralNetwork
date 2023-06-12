@@ -32,7 +32,7 @@
         </div>
     
 
-        <div class="row bg-light my-3 p-5 text-black">
+        <div class="bg-light my-3 p-5 text-black">
             <div class="position-relative overflow-hidden p-3 m-md-3 text-center">
             <div class="col-12 col-sm-12 col-md-10 col-lg-8 col-xl-5 gy-3 mx-auto">
                 <h2 class="display-4 fw-normal">Изображения для загрузки</h2>
@@ -43,21 +43,24 @@
                 
             </div>
             
-            <div class="col-md-4 col-sm-12 col-xs-12 my-col text-center p-0">
-                <img class="rounded-circle" src="{{ url_for('static',filename='images/person14_virus_44.png') }}" height="140" width="140">
-                <h2>Пневмония</h2>
-                <p>Пневмония может быть самостоятельным заболеванием или вторичным осложнением многих инфекционных и неинфекционных процессов.</p>
+            <div class="row">
+                <div class="col-md-4 col-sm-12 col-xs-12 my-col text-center p-0">
+                    <img class="rounded-circle" src="{{ url_for('static',filename='images/person14_virus_44.png') }}" height="140" width="140">
+                    <h2>Пневмония</h2>
+                    <p>Пневмония может быть самостоятельным заболеванием или вторичным осложнением многих инфекционных и неинфекционных процессов.</p>
+                </div>
+                <div class="col-md-4 col-sm-12 col-xs-12 my-col text-center p-0">
+                    <img class="rounded-circle" src="{{ url_for('static',filename='images/COVID19(460).png') }}" height="140" width="140">
+                    <h2>Covid-19</h2>
+                    <p>Означает «болезнь, вызываемая коронавирусом», а цифра 19 в названии указывает на год появления вируса.</p>
+                </div>
+                <div class="col-md-4 col-sm-12 col-xs-12 my-col text-center p-0">
+                    <img class="rounded-circle" src="{{ url_for('static',filename='images/Tuberculosis-662.png') }}" height="140" width="140">
+                    <h2>Туберкулез</h2>
+                    <p>Широко распространённое в мире инфекционное заболевание человека и животных, вызываемое различными видами микобактерий из группы Mycobacterium tuberculosis.</p>
+                </div>
             </div>
-            <div class="col-md-4 col-sm-12 col-xs-12 my-col text-center p-0">
-                <img class="rounded-circle" src="{{ url_for('static',filename='images/COVID19(460).png') }}" height="140" width="140">
-                <h2>Covid-19</h2>
-                <p>Означает «болезнь, вызываемая коронавирусом», а цифра 19 в названии указывает на год появления вируса.</p>
-            </div>
-            <div class="col-md-4 col-sm-12 col-xs-12 my-col text-center p-0">
-                <img class="rounded-circle" src="{{ url_for('static',filename='images/Tuberculosis-662.png') }}" height="140" width="140">
-                <h2>Туберкулез</h2>
-                <p>Широко распространённое в мире инфекционное заболевание человека и животных, вызываемое различными видами микобактерий из группы Mycobacterium tuberculosis.</p>
-            </div>
+            
         </div>
 
         </div>
@@ -111,6 +114,7 @@
                   </div>
                 </div>
               </section>
+            </section>
         </div>
 
         <script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
