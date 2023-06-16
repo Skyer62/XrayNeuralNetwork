@@ -34,7 +34,7 @@ pip install -r requirements.txt
 ```sh
 python main.py
 ```
-3. Проект доступен:
+4. Проект доступен:
 ```sh
 http://127.0.0.1:80
 ```
