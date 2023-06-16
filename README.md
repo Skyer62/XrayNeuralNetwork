@@ -30,9 +30,13 @@ python -m venv venv
 
 pip install -r requirements.txt
 ```
-4. Запуск проекта:
+3. Запуск проекта:
 ```sh
 python main.py
+```
+3. Проект доступен:
+```sh
+http://127.0.0.1:80
 ```
 
 ***
